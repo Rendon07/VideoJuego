@@ -13,23 +13,28 @@ public class Botecito extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     Boolean canFire = true;
-    public  Botecito(int cantidad){
-         setRotation(cantidad);
+    public  Botecito(){
+        
         }
     
  public void act ()
 {
     if(Greenfoot.isKeyDown("D")){
          setLocation(getX()+5, getY());
+         setRotation(90);
         }
-    if(Greenfoot.isKeyDown("A")){
+        
+    else if(Greenfoot.isKeyDown("A")){
          setLocation(getX()-5, getY());
+         setRotation(270);
     }
-    if(Greenfoot.isKeyDown("W")){
+    else if(Greenfoot.isKeyDown("W")){
         setLocation(getX(), getY()-5);
+        setRotation(360);
     }    
-    if(Greenfoot.isKeyDown("S")){
+    else if(Greenfoot.isKeyDown("S")){
         setLocation(getX(), getY()+5);
+        setRotation(180);
     }
     fireProjectile();
 }
@@ -37,12 +42,16 @@ public class Botecito extends Actor
     public void fireProjectile()
     {
         if(Greenfoot.isKeyDown("space") && canFire == true){
-            getWorld().addObject(new Calavera(), getX(), getY()-30);
+            getWorld().addObject(new Calavera(), getX () ,getY()-30 );
             canFire = false;
             
         } else if(!Greenfoot.isKeyDown("space")){
             canFire =true;   
         }
+        
+    
+
+        
 
 }
  }

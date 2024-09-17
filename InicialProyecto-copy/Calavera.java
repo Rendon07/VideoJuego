@@ -1,76 +1,51 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-
 /**
- ******************Space Game*****************
- * 
- *  Ejercicio de Uso Libre
- * 
- *  No se permite la comercializacion de este codigo.
- * 
- *  Realizar ejercicio de programacion de juego, 
- *  en el cual veremos con programacion Orienta a Objeto en Java
- *  Los elementos necesarios para aprender a programar.
- *  Este ejercicio puede mejorarse aun mas en cuestion de codigo
- * 
- * @author Anderson Camacho 
+ *
+ * @author Anderson Camacho
  * @email: camachosinh@gmail.com
  * @version general 1.5
- * 
- * nota: falta docuemtnar despues despues de enemigos.
- * 
- * Nota del desarrollador:
- * 
- * Este codigo fue tomado de canal de o youtube Coding Club 
- * (https://www.youtube.com/c/CodingClub/about) y se 
- * actualizando elementos a codigo estandarizado. 
  */
 class Calavera extends Actor
 {
-    /**
-     * Declaraciones
-     */
-    /**
-     * Constructor
-     */
-    public Calavera()
-    {
+   
+    private int direccion;
+   
+    public void addedToWorld(World world){
+        direccion = getWorld().getObjects(Botecito.class).get(0).getRotation();
     }
-
-    /**
-     * Metodos getter and setters
-     */
-    /**
-     * Metodos Action que se ejecuta siempre que el objeto exista
-     */
-    public void act() 
+   
+    public void act()
     {
-        projectileMove();
-        removeFromWorld();
-    } 
-
-    /**
-     * Metodo preparacion de los elementos de esta Clase
-     */
-    private void prepare()
-    {
+        movimientoProyectil();
+        quitarDelMundo();
     }
-
-    /**
-     * Metodos de Projectile completos y con elementos completos no estandares.
-     */
-
-    public void projectileMove()
+   
+    public void movimientoProyectil()
     {
-        setLocation(getX(), getY() - 10);
+        if (direccion == 360 || direccion == 0){
+        setLocation(getX(), getY()-10);
+        }
+        else if (direccion == 180){
+        setLocation(getX(), getY()+10);    
+        }
+        else if (direccion == 90){
+        setLocation(getX()+10, getY());
+        
+        }
+        else if (direccion == 270){
+        setLocation(getX()-10, getY());
+        
+        }
     }
-
-    public void removeFromWorld()
+   
+    public void quitarDelMundo()
     {
-        if(getY() == 0)
+        if(getY() == 0 || getX() == 0 || getX() == getWorld().getWidth()-1 || getY() == getWorld().getHeight()-1)
         {
             getWorld().removeObject(this);
         }
     }
-
 }
+
+
